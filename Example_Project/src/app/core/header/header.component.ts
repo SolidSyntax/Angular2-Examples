@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 
 import { DataStorageService } from '../../shared/data-storage.service';
 import { AuthService } from '../../auth/auth.service';
+import {HttpEvent} from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +17,10 @@ export class HeaderComponent {
   onSaveData() {
     this.dataStorageService.storeRecipes()
       .subscribe(
-        (response: Response) => {
-          console.log(response);
+        (httpEvent: HttpEvent<Object>) => {
+          console.log(httpEvent);
+          // HttpEvent.type is a value in the range of HttpEventType
+          // Multiple events are received for a single call
         }
       );
   }
